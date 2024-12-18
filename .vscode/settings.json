@@ -1,0 +1,6 @@
+{
+    // PrismaのスキーマファイルはフォーマッタとしてPrisma.prismaを利用
+    "[prisma]": {
+        "editor.defaultFormatter": "Prisma.prisma"
+    }
+}

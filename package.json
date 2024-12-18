@@ -1,0 +1,19 @@
+{
+    "name": "prisma-sample",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "scripts": {
+        "typecheck": "tsc --noEmit",
+        "dev": "vite-node index.ts",
+        "prismaformat": "prisma format",
+        "prismalint": "prisma validate"
+    },
+    "devDependencies": {
+        "@prisma/client": "^6.1.0",
+        "@types/node": "^22.10.2",
+        "argon2": "^0.41.1",
+        "prisma": "^6.1.0",
+        "typescript": "^5.7.2",
+        "vite-node": "^2.1.8"
+    }
+}
