@@ -41,3 +41,9 @@ npx prisma migrate dev --name init
 ```
 
 成功すると`prisma`下に、`migrations`ディレクトリが作成される
+
+### Seeding
+
+```bash
+npm run seed
+```
