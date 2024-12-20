@@ -1,4 +1,5 @@
 import { PrismaClient, User } from '@prisma/client'
+import { getUserFromEmail } from "@prisma/client/sql"
 
 const prisma = new PrismaClient()
 
@@ -21,26 +22,31 @@ async function main() {
   // JOIN検索
   // titleにTypeScriptが含まれているデータを昇順で5件まで取得
   // 投稿者データも含める
-  const posts = await prisma.post.findMany({
-    where: {
-        title: {
-            contains: 'TypeScript'
-        }
-    },
-    take: 5,
-    orderBy: {
-        id: 'asc'
-    },
-    include: {
-        author: true
-    }
-  })
-  console.log(posts)
+  // const posts = await prisma.post.findMany({
+  //   where: {
+  //       title: {
+  //           contains: 'TypeScript'
+  //       }
+  //   },
+  //   take: 5,
+  //   orderBy: {
+  //       id: 'asc'
+  //   },
+  //   include: {
+  //       author: true
+  //   }
+  // })
+  // console.log(posts)
 
   // Native Query（SQLべた書き）
-  // const email = 'alice@example.com'
+  // ただし、このままだと変数aliceの型はunknownになってしまう問題がある
+  const email = 'alice@example.com'
   // const alice = await prisma.$queryRaw<User>`SELECT * FROM user WHERE email = ${email}`
   // console.log(alice)
+
+  // TypedSQLで変数aliceに型を付与できる
+  const alice = await prisma.$queryRawTyped(getUserFromEmail(email))
+  console.log(alice)
 }
 
 main()

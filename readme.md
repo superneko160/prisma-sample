@@ -47,3 +47,24 @@ npx prisma migrate dev --name init
 ```bash
 npm run seed
 ```
+
+### TypedSQL
+
+生のSQLに対して自動で型を付けてくれる機能
+
+`prisma/sql`ディレクトリ下に置かれたsqlファイルから型定義ファイルを生成する
+
+```bash
+npm run generatesql
+```
+
+生成された型定義ファイルは`node_modules/.prisma/client/sql`に置かれる
+
+`getUserFromEmail.sql`から`getUserFromEmail()`というように、sqlファイル名がそのまま関数名になる。生成された関数は`$queryRawTyped`メソッドを使って呼び出す
+
+```ts
+import { getUserFromEmail } from "@prisma/client/sql"
+
+const email = 'alice@example.com'
+const alice = await prisma.$queryRawTyped(getUserFromEmail(email))
+```
